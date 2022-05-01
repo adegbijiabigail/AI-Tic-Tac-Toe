@@ -1,0 +1,94 @@
+body {
+	font-family: 'Righteous', cursive;
+	text-align: center;
+	min-width: 300px;
+	min-height: 500px;
+	color: #787878;;
+}
+
+button {
+	font-family: 'Righteous', cursive;
+	border: none;
+	background-color: #9d54d1;
+	text-align: center;
+	color: white;
+	padding: 12px 17px;
+	text-decoration: none;
+	cursor: pointer;
+	display: inline-block;
+	margin-bottom: 30px;
+}
+
+button:hover {
+	background-color: #b55ef2;
+}
+
+button:click {
+	background-color: #b55ef2;
+}
+
+a {
+	text-decoration: none;
+	color: #787878;;
+}
+
+a:hover {
+	color: #9d54d1;
+}
+
+#turn_text {
+	color: black;
+}
+
+#board {
+	display: grid;
+	width: 300px;
+	height: 300px;
+	grid-template-columns: auto auto auto;
+	border: none;
+	border-radius: 20px;
+	margin: auto;
+}
+
+.selling_point {
+	font-size: 1.25em;
+}
+
+.cell {
+	width : 100px;
+	height: 100px;
+	border: 3px solid #787878;
+	text-align: center;
+	align-items: center;
+	transition: background 0.2s ease-in-out;
+	font-family: 'Luckiest Guy', cursive;
+}
+
+.cell:hover {
+	cursor: pointer;
+	background-color : #fcfcfc;
+}
+
+#b0,
+#b1,
+#b2 {
+	border-top: none;
+}
+
+#b0,
+#b3,
+#b6 {
+	border-left: none;
+}
+
+#b2,
+#b5,
+#b8 {
+	border-right: none;
+}
+
+#b6,
+#b7,
+#b8 {
+	border-bottom: none;
+}
