@@ -23,6 +23,9 @@ function check_if_won(board, player) {
 function mark(index, player) {
 	if (board[index] == 0) {
 		board[index] = player;
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -146,11 +149,6 @@ function logic() {
 }
 
 function setup() {
-	let date = new Date();
-	let year = date.getFullYear();
-	let credits_text = document.getElementById("credits");
-	credits_text.innerHTML = `(C) ${year}, Abigail Adegbiji @<a href="https://github.com/aaa9753">aaa9753</a>`
-
 	for (let div of board_ui.children) {
 		divs.push(div);
 	}
@@ -159,8 +157,10 @@ function setup() {
 		let div = divs[i];
 		div.onclick = () => {
 			if (turn === 0) { //if player turn
-				mark(i, 1);
-				turn = 1; //to ai turn
+				is_markable = mark(i, 1);
+				if (is_markable === true) {
+					turn = 1; //to ai turn
+				}
 			}
 		}
 	}

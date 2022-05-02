@@ -1,7 +1,7 @@
 body {
 	font-family: 'Righteous', cursive;
 	text-align: center;
-	min-width: 300px;
+	min-width: 350px;
 	min-height: 500px;
 	color: #787878;;
 }
@@ -9,7 +9,7 @@ body {
 button {
 	font-family: 'Righteous', cursive;
 	border: none;
-	background-color: #9d54d1;
+	background-color: #b938ff;
 	text-align: center;
 	color: white;
 	padding: 12px 17px;
@@ -17,14 +17,16 @@ button {
 	cursor: pointer;
 	display: inline-block;
 	margin-bottom: 30px;
+	border-radius: 20px;
+	transition: all 0.2s linear 0s;
 }
 
 button:hover {
-	background-color: #b55ef2;
+	background-color: #9a2fd4;
 }
 
 button:click {
-	background-color: #b55ef2;
+	background-color: #9a2fd4;
 }
 
 a {
@@ -42,8 +44,8 @@ a:hover {
 
 #board {
 	display: grid;
-	width: 300px;
-	height: 300px;
+	width: 350px;
+	height: 350px;
 	grid-template-columns: auto auto auto;
 	border: none;
 	border-radius: 20px;
@@ -52,14 +54,15 @@ a:hover {
 
 .selling_point {
 	font-size: 1.25em;
+	margin-top: 50px;
 }
 
 .cell {
 	display: flex;
 	justify-content: center;
 	align-items: center;	
-	width : 100px;
-	height: 100px;
+	width : 116px;
+	height: 116px;
 	border: 3px solid #787878;
 	text-align: center;
 	align-items: center;
