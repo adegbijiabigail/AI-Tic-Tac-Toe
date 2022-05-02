@@ -1,4 +1,3 @@
-
 let board = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //0--empty, 1-you, 2-ai
 let turn = Math.floor(Math.random() * 2); //0-you, 1-ai
 
@@ -105,10 +104,10 @@ function logic() {
 		let div = divs[i];
 		if (board[i] === 1) {
 			div.children[0].innerHTML = "X";
-			div.children[0].style.color = "#f23838";
+			div.children[0].style.color = "#3b83ff";
 		} else if (board[i] === 2) {
 			div.children[0].innerHTML = "O";
-			div.children[0].style.color = "#3b83ff";
+			div.children[0].style.color = "#f23838";
 		}
 	}
 
@@ -121,9 +120,9 @@ function logic() {
 
 		let turn_text = document.getElementById("turn_text");
 		if (turn === 0) {
-			turn_text.innerHTML = "It's your turn";
+			turn_text.innerHTML = "It's your turn.";
 		} else if (turn === 1) {
-			turn_text.innerHTML = "Ai's turn";
+			turn_text.innerHTML = "Ai's turn.";
 		}
 
 		if (turn === 1) {
@@ -147,6 +146,11 @@ function logic() {
 }
 
 function setup() {
+	let date = new Date();
+	let year = date.getFullYear();
+	let credits_text = document.getElementById("credits");
+	credits_text.innerHTML = `(C) ${year}, Abigail Adegbiji @<a href="https://github.com/aaa9753">aaa9753</a>`
+
 	for (let div of board_ui.children) {
 		divs.push(div);
 	}
@@ -164,7 +168,7 @@ function setup() {
 	let restart_button = document.getElementById("restart");
 
 	restart_button.onclick = () => {
-		board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+		location.reload();
 	}
 
 	setInterval(logic, 100);
