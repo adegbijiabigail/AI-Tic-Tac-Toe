@@ -1,6 +1,9 @@
 let board = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //0--empty, 1-you, 2-ai
 let turn = Math.floor(Math.random() * 2); //0-you, 1-ai
 
+let restart_button = document.getElementById("restart");
+restart_button.style.visibility = "hidden";
+
 let divs = [];
 let board_ui = document.getElementById("board");
 
@@ -107,10 +110,9 @@ function logic() {
 		let div = divs[i];
 		if (board[i] === 1) {
 			div.children[0].innerHTML = "X";
-			div.children[0].style.color = "#3b83ff";
+			div.children[0].style.color = "#b0b0b0";
 		} else if (board[i] === 2) {
 			div.children[0].innerHTML = "O";
-			div.children[0].style.color = "#f23838";
 		}
 	}
 
@@ -131,7 +133,9 @@ function logic() {
 		if (turn === 1) {
 			ai_move();
 		}
-	} else {
+	} else { 
+		restart_button.style.visibility = "visible";
+
 		let turn_text = document.getElementById("turn_text");
 		if (empty_count === 0) {
 			turn_text.innerHTML = "It's a draw.";
@@ -145,8 +149,7 @@ function logic() {
 			turn_text.innerHTML = "You won.";
 			turn = 2;
 		}
-	}
-}
+	}}
 
 function setup() {
 	for (let div of board_ui.children) {
@@ -164,8 +167,6 @@ function setup() {
 			}
 		}
 	}
-
-	let restart_button = document.getElementById("restart");
 
 	restart_button.onclick = () => {
 		location.reload();
