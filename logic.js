@@ -1,11 +1,80 @@
-let board = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //0--empty, 1-you, 2-ai
+let board = [0,0,0,0,0,0,0,0,0]; //0--empty, 1-you, 2-ai
 let turn = Math.floor(Math.random() * 2); //0-you, 1-ai
+
+let interval;
 
 let restart_button = document.getElementById("restart");
 restart_button.style.visibility = "hidden";
 
 let divs = [];
 let board_ui = document.getElementById("board");
+
+function lighten_text(indexes) {
+	for (let i = 0; i < indexes.length; i++) {
+		div = divs[indexes[i]];
+		div.children[0].style.color = "#ffffff";
+	}
+}
+
+function darken_text(indexes) {
+	for (let i = 0; i < divs.length; i++) {
+		let div = divs[i];
+		if (indexes.includes(i)) {
+			continue;
+		} else { div.children[0].style.color = "#8a8a8a"; }
+	} 
+}
+
+function reset_match() {
+	board = [0,0,0,0,0,0,0,0,0];
+
+	for (let div of divs) {
+		div.children[0].innerHTML = "";
+		div.children[0].style.color = "#ffffff";
+	}
+
+	divs = [];
+	restart_button.style.visibility = "hidden";
+	turn = Math.floor(Math.random() * 2);
+	setup();
+}
+
+function mark_who_won(player) {
+	let indexes;
+	if (board[0] == player && board[1] == player && board[2] == player) {
+		indexes = [0,1,2];
+		darken_text(indexes);
+	}
+	if (board[3] == player && board[4] == player && board[5] == player) {
+		indexes = [3, 4, 5];
+		darken_text(indexes);
+	}
+	if (board[6] == player && board[7] == player && board[8] == player) {
+		indexes = [6, 7, 8];
+		darken_text(indexes);
+	}
+	if (board[0] == player && board[3] == player && board[6] == player) {
+		indexes = [0, 3, 6];
+		darken_text(indexes);
+	}
+	if (board[1] == player && board[4] == player && board[7] == player) {
+		indexes = [1, 4, 7];
+		darken_text(indexes);
+	}
+	if (board[2] == player && board[5] == player && board[8] == player) {
+		indexes = [2, 5, 8];
+		darken_text(indexes);
+	}
+	if (board[0] == player && board[4] == player && board[8] == player) {
+		indexes = [0, 4, 8];
+		darken_text(indexes);
+	}
+	if (board[2] == player && board[4] == player && board[6] == player) {
+		indexes = [2, 4, 6];
+		darken_text(indexes);
+	}
+	return indexes;
+}
 
 function check_if_won(board, player) {
  	if ( (board[0] == player && board[1] == player && board[2] == player) ||
@@ -131,7 +200,7 @@ function logic() {
 		}
 
 		if (turn === 1) {
-			ai_move();
+			setTimeout(ai_move, 70);
 		}
 	} else { 
 		restart_button.style.visibility = "visible";
@@ -139,14 +208,19 @@ function logic() {
 		let turn_text = document.getElementById("turn_text");
 		if (empty_count === 0) {
 			turn_text.innerHTML = "It's a draw.";
+			clearInterval(interval);
 			turn = 2; //so player can't input
 		}
 		if (game_is_won_ai === true) {
-			turn_text.innerHTML = "The AI won.";
 			turn = 2;
+			turn_text.innerHTML = "The AI won.";
+			let indexes = mark_who_won(2); //mark ai
+			darken_text(indexes);
+			clearInterval(interval);
 		}
 		if (game_is_won_player === true) {
 			turn_text.innerHTML = "You won.";
+			clearInterval(interval);
 			turn = 2;
 		}
 	}}
@@ -169,8 +243,8 @@ function setup() {
 	}
 
 	restart_button.onclick = () => {
-		location.reload();
+		reset_match();
 	}
 
-	setInterval(logic, 100);
+	interval = setInterval(logic, 100);
 }
