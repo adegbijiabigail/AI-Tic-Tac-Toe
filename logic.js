@@ -8,6 +8,7 @@ restart_button.style.visibility = "hidden";
 
 let divs = [];
 let board_ui = document.getElementById("board");
+let turn_text = document.getElementById("turn_text");
 
 function lighten_text(indexes) {
 	for (let i = 0; i < indexes.length; i++) {
@@ -191,14 +192,6 @@ function logic() {
 	
 	//game is not won and not draw
 	if (game_is_won_player === false && game_is_won_ai === false && empty_count != 0) {
-
-		let turn_text = document.getElementById("turn_text");
-		if (turn === 0) {
-			turn_text.innerHTML = "It's your turn.";
-		} else if (turn === 1) {
-			turn_text.innerHTML = "Ai's turn.";
-		}
-
 		if (turn === 1) {
 			setTimeout(ai_move, 70);
 		}
@@ -207,25 +200,26 @@ function logic() {
 
 		let turn_text = document.getElementById("turn_text");
 		if (empty_count === 0) {
-			turn_text.innerHTML = "It's a draw.";
+			turn_text.innerHTML = "Game over -- It's a draw.";
 			clearInterval(interval);
 			turn = 2; //so player can't input
 		}
 		if (game_is_won_ai === true) {
 			turn = 2;
-			turn_text.innerHTML = "The AI won.";
+			turn_text.innerHTML = "Game over -- The AI won.";
 			let indexes = mark_who_won(2); //mark ai
 			darken_text(indexes);
 			clearInterval(interval);
 		}
 		if (game_is_won_player === true) {
-			turn_text.innerHTML = "You won.";
+			turn_text.innerHTML = "Game over -- You won.";
 			clearInterval(interval);
 			turn = 2;
 		}
 	}}
 
 function setup() {
+	turn_text.innerHTML = "";
 	for (let div of board_ui.children) {
 		divs.push(div);
 	}
